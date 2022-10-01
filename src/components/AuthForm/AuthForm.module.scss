@@ -1,0 +1,46 @@
+@import "src/styles/variables";
+
+.form_auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFF;
+  box-shadow: 0 4px 33px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  width: 409px;
+  height: 382px;
+  padding: 32px;
+  position: absolute;
+  left: calc(50% - 409px / 2 - 0.5px);
+  top: calc(50% - 382px / 2);
+
+  label {
+    font-weight: 300;
+  }
+
+  .input_block {
+    position: relative;
+
+    &.email_block {
+      margin-top: 32px;
+    }
+
+    &.password_block {
+      margin-top: 24px;
+    }
+
+    .error {
+      position: absolute;
+      color: #EB1717;
+      margin-top: 7px;
+    }
+  }
+
+
+  .btn_submit {
+    margin-top: 32px;
+    width: 345px;
+  }
+
+}
