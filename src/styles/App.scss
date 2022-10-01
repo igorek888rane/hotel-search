@@ -1,0 +1,44 @@
+@import 'src/styles/variables';
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #E5E5E5;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  text-align: center;
+  color: $text-color;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 22px;
+  color: $text-color;
+}
+
+label {
+  color: $text-color;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 19px;
+
+}
+
+.auth_page {
+  background: url("../assests/background_login_screen.jpg") 0/100vw 100vh no-repeat;
+  .content {
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(6px);
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
