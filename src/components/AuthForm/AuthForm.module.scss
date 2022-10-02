@@ -41,6 +41,16 @@
   .btn_submit {
     margin-top: 32px;
     width: 345px;
+    position: relative;
+
+    .message {
+      position: absolute;
+      margin-top: 10px;
+
+      span {
+        color: red;
+      }
+    }
   }
 
 }

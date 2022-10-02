@@ -41,5 +41,16 @@ label {
     height: 100vh;
     backdrop-filter: blur(6px);
     background: rgba(255, 255, 255, 0.6);
+
+    .nav {
+      a {
+        margin-left: 15px;
+        text-decoration: none;
+        color: $text-color;
+        &.active{
+          color:black;
+        }
+      }
+    }
   }
 }

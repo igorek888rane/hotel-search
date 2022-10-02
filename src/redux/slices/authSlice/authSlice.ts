@@ -1,12 +1,8 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IAuthState, paramsType} from "./authTypes";
-import {auth} from "../../../api";
+import {createSlice} from "@reduxjs/toolkit";
+import {IAuthState} from "./authTypes";
+import {authUser} from "./ActionCreator";
 
 
-export const authUser = createAsyncThunk('auth/authUser',
-    async ({path, params}: paramsType) => {
-        return await auth({path, params})
-    })
 const initialState: IAuthState = {
     data: {},
     message: '',
@@ -29,7 +25,7 @@ const authSlice = createSlice({
             state.loading = false
         })
         builder.addCase(authUser.rejected, (state) => {
-            state.message = 'error'
+            state.message = 'Ошибка'
             state.loading = false
         })
     }

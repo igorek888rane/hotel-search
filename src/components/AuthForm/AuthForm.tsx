@@ -5,8 +5,9 @@ import {Formik, FormikErrors} from "formik";
 import styles from './AuthForm.module.scss'
 import MyInput from "../UI/MyInput/MyInput";
 import MyButton from "../UI/MyButton/MyButton";
-import {useAppDispatch} from "../../hooks/useApp";
-import {authUser} from "../../redux/slices/authSlice/authSlice";
+import {useAppDispatch, useAppSelector} from "../../hooks/useApp";
+import {authUser} from "../../redux/slices/authSlice/ActionCreator";
+import {useLocation} from "react-router-dom";
 
 
 export type FormValues = {
@@ -15,34 +16,40 @@ export type FormValues = {
 }
 const AuthForm: FC = () => {
     const dispatch = useAppDispatch()
+    const {loading, message} = useAppSelector(state => state.auth)
+    const location = useLocation()
 
     const initialValue: FormValues = {email: '', password: ''}
     return (
         <div className={styles.form_auth}>
-            <h1>Вход</h1>
+            <h1>{location.pathname === '/login'
+                ? 'Вход'
+                : 'Регистрация'}
+            </h1>
             <Formik
                 initialValues={initialValue}
-                // validate={values => {
-                //     const errors: FormikErrors<FormValues> = {};
-                //     if (!values.email) {
-                //         errors.email = 'Обязательное поле';
-                //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-                //         errors.email = 'Некорректный адресс почты ';
-                //     }
-                //
-                //     if (!values.password) {
-                //         errors.password = 'Обязательное поле'
-                //     } else if (!/(?=.*[a-z0-9])/g.test(values.password)) {
-                //         errors.password = 'Не должен содержать кириллицу'
-                //     } else if (!/[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
-                //         errors.password = ' Минимум 8 символов'
-                //     }
-                //     return errors;
-                // }}
+                validate={values => {
+                    const errors: FormikErrors<FormValues> = {};
+                    if (!values.email) {
+                        errors.email = 'Обязательное поле';
+                    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                        errors.email = 'Некорректный адресс почты ';
+                    }
+                    if (!values.password) {
+                        errors.password = 'Обязательное поле'
+                    } else if (!/(?=.*[a-z0-9])/g.test(values.password)) {
+                        errors.password = 'Не должен содержать кириллицу'
+                    } else if (!/[0-9a-zA-Z!@#$%^&*]{3,}/g.test(values.password)) {
+                        errors.password = ' Минимум 3 символов'
+                    }
+                    return errors;
+                }}
                 onSubmit={(values) => {
-                    const params = {email: values.email, password: values.password}
-                    console.log(params);
-                    dispatch(authUser({path: 'login', params}))
+                    const data = {
+                        path: location.pathname === '/login' ? 'login' : 'register',
+                        params: {email: values.email, password: values.password}
+                    }
+                    dispatch(authUser(data))
                 }}
             >
                 {({
@@ -88,9 +95,17 @@ const AuthForm: FC = () => {
 
                         <div className={styles.btn_submit}>
                             <MyButton type="submit">
-                                Войти
+                                {location.pathname === '/login'
+                                    ? 'Войти'
+                                    : 'Зарегистрироватсья'}
                             </MyButton>
+                            <div className={styles.message}>
+                                {loading && 'Загрузка...'}
+                                {!loading&&message &&message!=='success'&& <span>{message}</span>}
+                            </div>
                         </div>
+
+
                     </form>
                 )}
             </Formik>
