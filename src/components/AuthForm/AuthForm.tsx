@@ -5,38 +5,44 @@ import {Formik, FormikErrors} from "formik";
 import styles from './AuthForm.module.scss'
 import MyInput from "../UI/MyInput/MyInput";
 import MyButton from "../UI/MyButton/MyButton";
+import {useAppDispatch} from "../../hooks/useApp";
+import {authUser} from "../../redux/slices/authSlice/authSlice";
 
-type FormValues = {
+
+export type FormValues = {
     email: string,
     password: string,
 }
 const AuthForm: FC = () => {
+    const dispatch = useAppDispatch()
+
     const initialValue: FormValues = {email: '', password: ''}
     return (
         <div className={styles.form_auth}>
-            <h1>Simple Hotel Check</h1>
+            <h1>Вход</h1>
             <Formik
                 initialValues={initialValue}
-                validate={values => {
-                    const errors: FormikErrors<FormValues> = {};
-                    if (!values.email) {
-                        errors.email = 'Обязательное поле';
-                    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-                        errors.email = 'Некорректный адресс почты ';
-                    }
-
-                    if (!values.password) {
-                        errors.password = 'Обязательное поле'
-                    } else if (!/(?=.*[a-z0-9])/g.test(values.password)) {
-                        errors.password = 'Не должен содержать кириллицу'
-                    } else if (!/[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
-                        errors.password = ' Минимум 8 символов'
-                    }
-                    return errors;
-                }}
-                onSubmit={() => {
-                    window.localStorage.setItem('auth', 'true')
-
+                // validate={values => {
+                //     const errors: FormikErrors<FormValues> = {};
+                //     if (!values.email) {
+                //         errors.email = 'Обязательное поле';
+                //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                //         errors.email = 'Некорректный адресс почты ';
+                //     }
+                //
+                //     if (!values.password) {
+                //         errors.password = 'Обязательное поле'
+                //     } else if (!/(?=.*[a-z0-9])/g.test(values.password)) {
+                //         errors.password = 'Не должен содержать кириллицу'
+                //     } else if (!/[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
+                //         errors.password = ' Минимум 8 символов'
+                //     }
+                //     return errors;
+                // }}
+                onSubmit={(values) => {
+                    const params = {email: values.email, password: values.password}
+                    console.log(params);
+                    dispatch(authUser({path: 'login', params}))
                 }}
             >
                 {({
@@ -50,10 +56,10 @@ const AuthForm: FC = () => {
                   }) => (
                     <form onSubmit={handleSubmit}>
                         <div className={`${styles.input_block} ${styles.email_block} `}>
-                            <label style={errors.email && touched.email ? {color: 'red'} : {color:'#424242'}}
-                                htmlFor="email">Логин</label>
+                            <label style={errors.email && touched.email ? {color: 'red'} : {color: '#424242'}}
+                                   htmlFor="email">Логин</label>
                             <MyInput
-                                style={errors.email && touched.email ? {color: 'red'} : {color:'#424242'}}
+                                style={errors.email && touched.email ? {color: 'red'} : {color: '#424242'}}
                                 name="email"
                                 type="email"
                                 onBlur={handleBlur}
@@ -65,10 +71,10 @@ const AuthForm: FC = () => {
                             </div>
                         </div>
                         <div className={`${styles.input_block} ${styles.password_block} `}>
-                            <label style={errors.password && touched.password ? {color: 'red'} : {color:'#424242'}}
-                                htmlFor="password">Пароль</label>
+                            <label style={errors.password && touched.password ? {color: 'red'} : {color: '#424242'}}
+                                   htmlFor="password">Пароль</label>
                             <MyInput
-                                style={errors.password && touched.password ? {color: 'red'} : {color:'#424242'}}
+                                style={errors.password && touched.password ? {color: 'red'} : {color: '#424242'}}
                                 name='password'
                                 type="password"
                                 onBlur={handleBlur}
