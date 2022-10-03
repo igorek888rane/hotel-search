@@ -8,6 +8,7 @@ import MyButton from "../UI/MyButton/MyButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/useApp";
 import {authUser} from "../../redux/slices/authSlice/ActionCreator";
 import {useLocation} from "react-router-dom";
+import Loader from "../UI/Loader/Loader";
 
 
 export type FormValues = {
@@ -16,7 +17,7 @@ export type FormValues = {
 }
 const AuthForm: FC = () => {
     const dispatch = useAppDispatch()
-    const {loading, message} = useAppSelector(state => state.auth)
+    const {loadingAuth, message} = useAppSelector(state => state.auth)
     const location = useLocation()
 
     const initialValue: FormValues = {email: '', password: ''}
@@ -94,14 +95,15 @@ const AuthForm: FC = () => {
                         </div>
 
                         <div className={styles.btn_submit}>
-                            <MyButton type="submit">
-                                {location.pathname === '/login'
-                                    ? 'Войти'
-                                    : 'Зарегистрироватсья'}
-                            </MyButton>
+                            {loadingAuth
+                                ? <Loader width={30} height={30}/>
+                                : <MyButton type="submit">
+                                    {location.pathname === '/login'
+                                        ? 'Войти'
+                                        : 'Зарегистрироватсья'}
+                                </MyButton>}
                             <div className={styles.message}>
-                                {loading && 'Загрузка...'}
-                                {!loading&&message &&message!=='success'&& <span>{message}</span>}
+                                {!loadingAuth && message && message !== 'success' && <span>{message}</span>}
                             </div>
                         </div>
 

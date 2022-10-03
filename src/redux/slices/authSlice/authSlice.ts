@@ -7,6 +7,7 @@ const initialState: IAuthState = {
     data: {},
     auth: false,
     message: '',
+    loadingAuth: false,
     loading: false,
 }
 const authSlice = createSlice({
@@ -22,17 +23,17 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(authUser.pending, state => {
-            state.loading = true
+            state.loadingAuth = true
         })
         builder.addCase(authUser.fulfilled, (state, action) => {
             state.data = action.payload.data
             state.message = action.payload.message
             state.auth = true
-            state.loading = false
+            state.loadingAuth = false
         })
         builder.addCase(authUser.rejected, (state) => {
             state.message = 'Ошибка'
-            state.loading = false
+            state.loadingAuth = false
         })
         builder.addCase(fetchMe.pending, state => {
             state.loading = true

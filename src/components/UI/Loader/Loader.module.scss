@@ -1,16 +1,27 @@
 @import 'src/styles/variables';
 
 .loader_block {
-  border: 5px dashed $text-color;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
-  margin: 50px auto;
-  animation: rotate 1s infinite linear;
-}
-.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  top:160px;
+  //margin-top:100px;
+  .loader {
+    border: 5px dashed $text-color;
+    border-radius: 50%;
+    //width: 200px;
+    //height: 200px;
+    animation: rotate 2s infinite linear;
+  }
+
+  .text {
+    position: absolute;
+    span{
+      font-size: 22px;
+      font-weight: 500;
+      color:$text-color;
+    }
+  }
 }
 
 

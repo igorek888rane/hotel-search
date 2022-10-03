@@ -12,6 +12,7 @@ export interface IAuthState {
     auth: boolean,
     message: string,
     loading: boolean,
+    loadingAuth: boolean,
 }
 
 export type paramsType = {

@@ -11,6 +11,5 @@ export const authUser = createAsyncThunk<IResponse, paramsType>('auth/authUser',
         return data
     })
 
-export const fetchMe = createAsyncThunk<IResponse>('auth/fetchMe', async () => {
-    return await getMe()
-})
+export const fetchMe =
+    createAsyncThunk<IResponse>('auth/fetchMe', async () => await getMe())
