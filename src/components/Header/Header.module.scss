@@ -1,0 +1,26 @@
+@import "src/styles/variables";
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
+
+
+  .logOut {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    span {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: $text-color;
+
+    }
+
+    img {
+      height: 24px;
+      width: 24px;
+      margin-left: 15px;
+    }
+  }
+}

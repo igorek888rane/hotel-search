@@ -9,6 +9,7 @@ interface IData {
 
 export interface IAuthState {
     data: IData | {},
+    auth: boolean,
     message: string,
     loading: boolean,
 }

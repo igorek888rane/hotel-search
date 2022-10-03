@@ -1,17 +1,28 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import HotelSearchPage from "../pages/HotelSearchPage";
 import AuthPage from "../pages/AuthPage";
-import {useAppSelector} from "../hooks/useApp";
+import {useAppDispatch, useAppSelector} from "../hooks/useApp";
+import {fetchMe} from "../redux/slices/authSlice/ActionCreator";
+import Loader from "./UI/Loader/Loader";
 
 const AppRouter: FC = () => {
 
-    const {message} = useAppSelector(state => state.auth)
+    const {auth} = useAppSelector(state => state.auth)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+        dispatch(fetchMe())
+    }, [])
+    const {loading} = useAppSelector(state => state.auth)
+    if (loading) {
+        return <Loader/>
+    }
     return (
         <div className="App">
-            {message === 'success'
+            {auth
                 ? <Routes>
                     <Route path={''} element={<HotelSearchPage/>}/>
+                    <Route path={'*'} element={<Navigate to={''}/>}/>
                 </Routes>
                 : <Routes>
                     <Route path={'/login'} element={<AuthPage/>}/>

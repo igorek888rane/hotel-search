@@ -1,0 +1,24 @@
+@import 'src/styles/variables';
+
+.loader_block {
+  border: 5px dashed $text-color;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 50px auto;
+  animation: rotate 1s infinite linear;
+}
+.loader {
+  position: relative;
+  top:160px;
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

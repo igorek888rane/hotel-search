@@ -1,8 +1,13 @@
-import axios from "axios";
 import {IResponse, paramsType} from "../redux/slices/authSlice/authTypes";
+import axios from "../utils/axios";
 
 
 export const auth = async ({path, params}: paramsType) => {
-    const {data} = await axios.post<IResponse>(`${process.env.REACT_APP_AUTH_API}/auth/${path}`, params)
+    const {data} = await axios.post<IResponse>(`/auth/${path}`, params)
     return data;
+}
+
+export const getMe = async () => {
+    const {data} = await axios.get<IResponse>(`/auth/me`)
+    return data
 }
