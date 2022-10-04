@@ -127,8 +127,6 @@ const Form: FC<AuthFormProps> = ({title, buttonText, reg}) => {
                                 {!loadingAuth && message && message !== 'success' && <span>{message}</span>}
                             </div>
                         </div>
-
-
                     </form>
                 )}
             </Formik>
