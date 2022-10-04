@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IAuthState} from "./authTypes";
 import {authUser, fetchMe} from "./ActionCreator";
 
@@ -19,6 +19,9 @@ const authSlice = createSlice({
             state.auth = false
             state.message = ''
             state.loading = false
+        },
+        setErrorMessage(state: IAuthState, action: PayloadAction<string>) {
+            state.message = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -32,7 +35,6 @@ const authSlice = createSlice({
             state.loadingAuth = false
         })
         builder.addCase(authUser.rejected, (state) => {
-            state.message = 'Ошибка'
             state.loadingAuth = false
         })
         builder.addCase(fetchMe.pending, state => {
@@ -51,5 +53,5 @@ const authSlice = createSlice({
     }
 })
 
-export const {logOut} = authSlice.actions
+export const {logOut, setErrorMessage} = authSlice.actions
 export default authSlice.reducer
