@@ -8,8 +8,7 @@
   background-color: #FFFF;
   box-shadow: 0 4px 33px rgba(0, 0, 0, 0.04);
   border-radius: 16px;
-  width: 409px;
-  height: 382px;
+  max-width: 409px;
   padding: 32px;
   position: absolute;
   left: calc(50% - 409px / 2 - 0.5px);

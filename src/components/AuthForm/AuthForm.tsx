@@ -13,6 +13,7 @@ import Loader from "../UI/Loader/Loader";
 export type FormValues = {
     email: string,
     password: string,
+    confirmPassword?:string,
 }
 
 interface AuthFormProps {
@@ -24,9 +25,7 @@ interface AuthFormProps {
 const AuthForm: FC<AuthFormProps> = ({title, buttonText, reg}) => {
     const dispatch = useAppDispatch()
     const {loadingAuth, message} = useAppSelector(state => state.auth)
-
-
-    const initialValue: FormValues = {email: '', password: ''}
+    const initialValue: FormValues = {email: '', password: '',confirmPassword:''}
     return (
         <div className={styles.form_auth}>
             <h1>{title}</h1>
@@ -46,6 +45,13 @@ const AuthForm: FC<AuthFormProps> = ({title, buttonText, reg}) => {
                     } else if (!/[0-9a-zA-Z!@#$%^&*]{3,}/g.test(values.password)) {
                         errors.password = ' Минимум 3 символов'
                     }
+                   if(reg){
+                       if(!values.confirmPassword){
+                           errors.confirmPassword = 'Обязательное поле'
+                       }else if(values.confirmPassword!==values.password){
+                           errors.confirmPassword = 'Пароли не совпадают'
+                       }
+                   }
 
                     return errors;
                 }}
@@ -97,7 +103,21 @@ const AuthForm: FC<AuthFormProps> = ({title, buttonText, reg}) => {
                                 {errors.password && touched.password && errors.password}
                             </div>
                         </div>
-
+                        {reg&&  <div className={`${styles.input_block} ${styles.password_block} `}>
+                            <label style={errors.confirmPassword && touched.confirmPassword ? {color: 'red'} : {color: '#424242'}}
+                                   htmlFor="password">Повторите пароль</label>
+                            <MyInput
+                                style={errors.confirmPassword && touched.confirmPassword ? {color: 'red'} : {color: '#424242'}}
+                                name='confirmPassword'
+                                type="password"
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                                value={values.confirmPassword}
+                            />
+                            <div className={styles.error}>
+                                {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                            </div>
+                        </div>}
                         <div className={styles.btn_submit}>
                             {loadingAuth
                                 ? <Loader width={30} height={30}/>
