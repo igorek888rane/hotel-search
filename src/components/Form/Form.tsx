@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Formik, FormikErrors} from "formik";
 
 
-import styles from './AuthForm.module.scss'
+import styles from './Form.module.scss'
 import MyInput from "../UI/MyInput/MyInput";
 import MyButton from "../UI/MyButton/MyButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/useApp";
@@ -22,7 +22,7 @@ interface AuthFormProps {
     reg: boolean
 }
 
-const AuthForm: FC<AuthFormProps> = ({title, buttonText, reg}) => {
+const Form: FC<AuthFormProps> = ({title, buttonText, reg}) => {
     const dispatch = useAppDispatch()
     const {loadingAuth, message} = useAppSelector(state => state.auth)
     const initialValue: FormValues = {email: '', password: '',confirmPassword:''}
@@ -136,6 +136,6 @@ const AuthForm: FC<AuthFormProps> = ({title, buttonText, reg}) => {
     );
 }
 
-export default AuthForm;
+export default Form;
 
 

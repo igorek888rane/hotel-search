@@ -1,4 +1,4 @@
-import {FormValues} from "../../../components/AuthForm/AuthForm";
+import {FormValues} from "../../../components/Form/Form";
 
 
 interface IData {

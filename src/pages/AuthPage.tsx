@@ -1,14 +1,14 @@
 import React, {FC} from 'react';
-import AuthForm from "../components/AuthForm/AuthForm";
+import Form from "../components/Form/Form";
 import Nav from "../components/Nav/Nav";
 
 const AuthPage: FC = () => (
     <div className={'auth_page'}>
         <div className="content">
             <Nav/>
-            <AuthForm title={'Вход'}
-                      buttonText={'Войти'}
-                      reg={false}/>
+            <Form title={'Вход'}
+                  buttonText={'Войти'}
+                  reg={false}/>
         </div>
     </div>
 );
