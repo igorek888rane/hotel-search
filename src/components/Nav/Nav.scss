@@ -1,0 +1,11 @@
+@import "src/styles/variables";
+nav {
+  a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: $text-color;
+    &.active{
+      color: black;
+    }
+  }
+}

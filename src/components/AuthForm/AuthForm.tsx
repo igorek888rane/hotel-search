@@ -7,7 +7,6 @@ import MyInput from "../UI/MyInput/MyInput";
 import MyButton from "../UI/MyButton/MyButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/useApp";
 import {authUser} from "../../redux/slices/authSlice/ActionCreator";
-import {useLocation} from "react-router-dom";
 import Loader from "../UI/Loader/Loader";
 
 
@@ -15,18 +14,22 @@ export type FormValues = {
     email: string,
     password: string,
 }
-const AuthForm: FC = () => {
+
+interface AuthFormProps {
+    title: string,
+    buttonText: string,
+    reg: boolean
+}
+
+const AuthForm: FC<AuthFormProps> = ({title, buttonText, reg}) => {
     const dispatch = useAppDispatch()
     const {loadingAuth, message} = useAppSelector(state => state.auth)
-    const location = useLocation()
+
 
     const initialValue: FormValues = {email: '', password: ''}
     return (
         <div className={styles.form_auth}>
-            <h1>{location.pathname === '/login'
-                ? 'Вход'
-                : 'Регистрация'}
-            </h1>
+            <h1>{title}</h1>
             <Formik
                 initialValues={initialValue}
                 validate={values => {
@@ -43,11 +46,12 @@ const AuthForm: FC = () => {
                     } else if (!/[0-9a-zA-Z!@#$%^&*]{3,}/g.test(values.password)) {
                         errors.password = ' Минимум 3 символов'
                     }
+
                     return errors;
                 }}
                 onSubmit={(values) => {
                     const data = {
-                        path: location.pathname === '/login' ? 'login' : 'register',
+                        path: reg ? 'register' : 'login',
                         params: {email: values.email, password: values.password}
                     }
                     dispatch(authUser(data))
@@ -97,11 +101,8 @@ const AuthForm: FC = () => {
                         <div className={styles.btn_submit}>
                             {loadingAuth
                                 ? <Loader width={30} height={30}/>
-                                : <MyButton type="submit">
-                                    {location.pathname === '/login'
-                                        ? 'Войти'
-                                        : 'Зарегистрироватсья'}
-                                </MyButton>}
+                                : <MyButton
+                                    type="submit">{buttonText}</MyButton>}
                             <div className={styles.message}>
                                 {!loadingAuth && message && message !== 'success' && <span>{message}</span>}
                             </div>
