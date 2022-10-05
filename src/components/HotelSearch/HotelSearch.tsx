@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import styles from './HotelSearch.module.scss'
 import SearchBlock from "./SearchBlock/SearchBlock";
 import {useAppSelector} from "../../hooks/useApp";
+import FavoritesBlock from "./FavotitesBlock/FavoritesBlock";
 
 
 export interface dateOutProps {
@@ -9,7 +10,7 @@ export interface dateOutProps {
 }
 
 const HotelSearch: FC<dateOutProps> = ({dateOut}) => {
-     const {info} = useAppSelector(state => state?.search)
+    const {info} = useAppSelector(state => state?.search)
 
     const dateFormat = new Date(info.date)
         .toLocaleDateString('ru-RU', {day: '2-digit', month: 'long', year: 'numeric'})
@@ -18,7 +19,7 @@ const HotelSearch: FC<dateOutProps> = ({dateOut}) => {
     return (
         <div className={styles.hotel_search_block}>
             <SearchBlock dateOut={dateOut}/>
-            {/*<FavoritesBlock  dateFormat={dateFormat}/>*/}
+            <FavoritesBlock dateFormat={dateFormat}/>
             {/*<HotelsBlock dateFormat={dateFormat}/>*/}
         </div>
     );

@@ -1,4 +1,4 @@
-import {IHotels, IHotelsState} from "./hotelsTypes";
+import {IHotel, IHotelsState} from "./hotelsTypes";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchHotels} from "./ActionCreator";
 
@@ -14,12 +14,19 @@ const initialState: IHotelsState = {
 const hotelsSlice = createSlice({
     name: 'hotels',
     initialState,
-    reducers: {},
+    reducers: {
+        addFavorites: (state: IHotelsState, action: PayloadAction<IHotel>) => {
+
+        },
+        removeFavorites: (state: IHotelsState, action: PayloadAction<IHotel>) => {
+
+        },
+    },
     extraReducers: {
         [fetchHotels.pending.type]: (state: IHotelsState) => {
             state.loading = true
         },
-        [fetchHotels.fulfilled.type]: (state: IHotelsState, action: PayloadAction<IHotels[]>) => {
+        [fetchHotels.fulfilled.type]: (state: IHotelsState, action: PayloadAction<IHotel[]>) => {
             state.hotels = action.payload
             state.loading = false
         },
@@ -31,5 +38,5 @@ const hotelsSlice = createSlice({
 })
 
 
-export const {} = hotelsSlice.actions
+export const {addFavorites, removeFavorites} = hotelsSlice.actions
 export default hotelsSlice.reducer

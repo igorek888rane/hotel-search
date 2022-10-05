@@ -1,13 +1,13 @@
 
 
 export interface IHotelsState {
-    hotels: IHotels[],
-    favoritesHotels: IHotels[],
+    hotels: IHotel[],
+    favoritesHotels: IHotel[],
     loading: boolean,
     message: string,
 }
 
-export interface IHotels {
+export interface IHotel {
     hotelName: string,
     priceAvg: number,
     hotelId: number,
