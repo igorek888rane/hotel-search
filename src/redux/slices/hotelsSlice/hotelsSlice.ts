@@ -16,14 +16,14 @@ const hotelsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchHotels.pending.type]: (state) => {
+        [fetchHotels.pending.type]: (state: IHotelsState) => {
             state.loading = true
         },
-        [fetchHotels.fulfilled.type]: (state, action: PayloadAction<IHotels[]>) => {
+        [fetchHotels.fulfilled.type]: (state: IHotelsState, action: PayloadAction<IHotels[]>) => {
             state.hotels = action.payload
             state.loading = false
         },
-        [fetchHotels.rejected.type]: (state, action: PayloadAction<string>) => {
+        [fetchHotels.rejected.type]: (state: IHotelsState, action: PayloadAction<string>) => {
             state.message = action.payload
             state.loading = false
         },

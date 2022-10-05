@@ -13,7 +13,7 @@ const AppRouter: FC = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token')) dispatch(fetchMe())
-    }, [dispatch])
+    }, [])
     const {loading} = useAppSelector(state => state.auth)
     if (loading) {
         return <Loader width={200} height={200} marginTop={100}/>

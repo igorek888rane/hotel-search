@@ -32,7 +32,7 @@ export interface IHotels {
 }
 
 export interface HotelsParams {
-    city: string,
+    location: string,
     checkIn: string,
     checkOut: string,
 }

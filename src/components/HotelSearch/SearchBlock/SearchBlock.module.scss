@@ -1,0 +1,19 @@
+.search_block {
+  grid-area: A;
+  .date {
+    margin-top: 16px
+  }
+
+  .count_day {
+    margin-top: 20px;
+  }
+
+  .btn {
+    margin-top: 32px;
+  }
+
+  label {
+    font-weight: 500;
+  }
+
+}
