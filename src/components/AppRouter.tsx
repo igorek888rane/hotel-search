@@ -16,7 +16,7 @@ const AppRouter: FC = () => {
     }, [])
     const {loading} = useAppSelector(state => state.auth)
     if (loading) {
-        return <Loader width={200} height={200} marginTop={100}/>
+        return <Loader size={200} marginTop={100}/>
     }
     return (
         <div className="App">

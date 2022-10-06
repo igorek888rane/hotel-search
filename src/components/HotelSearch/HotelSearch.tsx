@@ -3,6 +3,7 @@ import styles from './HotelSearch.module.scss'
 import SearchBlock from "./SearchBlock/SearchBlock";
 import {useAppSelector} from "../../hooks/useApp";
 import FavoritesBlock from "./FavotitesBlock/FavoritesBlock";
+import HotelsBlock from "./HotelsBlock/HotelsBlock";
 
 
 export interface dateOutProps {
@@ -20,7 +21,7 @@ const HotelSearch: FC<dateOutProps> = ({dateOut}) => {
         <div className={styles.hotel_search_block}>
             <SearchBlock dateOut={dateOut}/>
             <FavoritesBlock dateFormat={dateFormat}/>
-            {/*<HotelsBlock dateFormat={dateFormat}/>*/}
+            <HotelsBlock dateFormat={dateFormat}/>
         </div>
     );
 };

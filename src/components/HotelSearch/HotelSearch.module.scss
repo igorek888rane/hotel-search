@@ -7,7 +7,7 @@
                         ' C B ';
   gap: 24px;
   position: absolute;
-  max-width: 1048px;
+  width: 1048px;
   left: calc(50% - 1048px / 2 + 12px);
   //margin: 0 auto;
   top: 92px;
@@ -31,7 +31,7 @@
     padding-right: 24px;
 
     .info_hotel {
-      max-width: 100%;
+      width: 100%;
       margin-left: 24px;
     }
 

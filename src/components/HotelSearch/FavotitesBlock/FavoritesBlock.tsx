@@ -5,10 +5,10 @@ import Sort from "./Sort";
 import HotelEl from "../HotelEl";
 import {useAppSelector} from "../../../hooks/useApp";
 
-type favoritesBlockProps = {
+export type dateFormatProps = {
     dateFormat: string,
 }
-const FavoritesBlock: FC<favoritesBlockProps> = ({dateFormat}) => {
+const FavoritesBlock: FC<dateFormatProps> = ({dateFormat}) => {
 
         const {favoritesHotels} = useAppSelector(state => state?.hotels)
         const {sortName, sortBy} = useAppSelector(state => state?.sort)

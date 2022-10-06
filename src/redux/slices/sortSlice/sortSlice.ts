@@ -13,10 +13,10 @@ const sortSlice = createSlice({
     initialState,
     reducers: {
         changeSortName: (state: ISortState, action: PayloadAction<string>) => {
-
+            state.sortName = action.payload
         },
         changeSortBy: (state: ISortState, action: PayloadAction<string>) => {
-
+            state.sortBy = action.payload
         },
     },
 

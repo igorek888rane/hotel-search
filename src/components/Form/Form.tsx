@@ -120,7 +120,7 @@ const Form: FC<AuthFormProps> = ({title, buttonText, reg}) => {
                         </div>}
                         <div className={styles.btn_submit}>
                             {loadingAuth
-                                ? <Loader width={30} height={30}/>
+                                ? <Loader size={30}/>
                                 : <MyButton
                                     type="submit">{buttonText}</MyButton>}
                             <div className={styles.message}>

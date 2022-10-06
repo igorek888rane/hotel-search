@@ -16,10 +16,10 @@ const hotelsSlice = createSlice({
     initialState,
     reducers: {
         addFavorites: (state: IHotelsState, action: PayloadAction<IHotel>) => {
-
+            state.favoritesHotels.push(action.payload)
         },
         removeFavorites: (state: IHotelsState, action: PayloadAction<IHotel>) => {
-
+            state.favoritesHotels = state.favoritesHotels.filter(h => h.hotelId !== action.payload.hotelId)
         },
     },
     extraReducers: {
