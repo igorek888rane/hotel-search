@@ -3,9 +3,10 @@ import styles from "./FavoritesBlock.module.scss";
 import {useAppDispatch, useAppSelector} from "../../../hooks/useApp";
 import {changeSortBy} from "../../../redux/slices/sortSlice/sortSlice";
 import {sortItemType} from "./Sort";
+import {sortByEnum} from "../../../redux/slices/sortSlice/sortTypes";
 
 type arrowElProps = {
-    sortByItem: string,
+    sortByItem: sortByEnum,
     sort: sortItemType,
 }
 const ArrowEl: FC<arrowElProps> = ({sortByItem, sort}) => {

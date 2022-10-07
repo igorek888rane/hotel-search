@@ -4,12 +4,13 @@ import ArrowEl from "./ArrowEl";
 import {useAppDispatch, useAppSelector} from "../../../hooks/useApp";
 import {changeSortName} from "../../../redux/slices/sortSlice/sortSlice";
 import {sortItemType} from "./Sort";
+import {sortByEnum} from "../../../redux/slices/sortSlice/sortTypes";
 
 
 const SelectEl: FC<{ sort: sortItemType }> = ({sort}) => {
     const {sortName} = useAppSelector(state => state.sort)
     const dispatch = useAppDispatch()
-    const sortByItems = ['ASC', 'DESC']
+    const sortByItems = [sortByEnum.asc, sortByEnum.desc]
     return (
         <div onClick={() => dispatch(changeSortName(sort.sortName))}
              className={`${styles.select} ${sort.sortName === sortName ? styles.active : ''}`}>
