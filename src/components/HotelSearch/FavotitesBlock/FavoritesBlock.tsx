@@ -4,23 +4,26 @@ import s from '../HotelSearch.module.scss'
 import Sort from "./Sort";
 import HotelEl from "../HotelEl";
 import {useAppSelector} from "../../../hooks/useApp";
+import {quickSort} from "../../../utils/quickSort";
 
 export type dateFormatProps = {
     dateFormat: string,
 }
+
 const FavoritesBlock: FC<dateFormatProps> = ({dateFormat}) => {
 
         const {favoritesHotels} = useAppSelector(state => state?.hotels)
         const {sortName, sortBy} = useAppSelector(state => state?.sort)
 
 
-        // const favoritesHotelsSort = useMemo(() => {
-        //     return [...favoritesHotels]
-        //         .sort((a, b) => sortBy === 'ASC'
-        //             ? a[sortName] > b[sortName] ? 1 : -1
-        //             : a[sortName] > b[sortName] ? -1 : 1)
-        // }, [favoritesHotels, sortName, sortBy])
-        const favoritesHotelsSort = favoritesHotels
+        const favoritesHotelsSort = useMemo(() => {
+            if (sortBy === 'ASC') {
+                return quickSort(favoritesHotels, sortName)
+            } else {
+                return quickSort(favoritesHotels, sortName).reverse()
+            }
+        }, [favoritesHotels, sortName, sortBy])
+
 
         return (
             <div className={`${styles.favorites_block} ${s.block}`}>

@@ -1,5 +1,3 @@
-
-
 export interface IHotelsState {
     hotels: IHotel[],
     favoritesHotels: IHotel[],
@@ -16,7 +14,7 @@ export interface IHotel {
         country: string,
         name: string,
         geo: { lon: number, lat: number },
-        state:string | null,
+        state: string | null,
     },
     locationId: number,
     priceFrom: number,
