@@ -22,7 +22,7 @@ const FavoritesBlock: FC<dateFormatProps> = ({dateFormat}) => {
             } else {
                 return quickSort(favoritesHotels, sortName).reverse()
             }
-        }, [favoritesHotels,quickSort, sortName, sortBy])
+        }, [favoritesHotels, sortName, sortBy])
 
 
         return (
