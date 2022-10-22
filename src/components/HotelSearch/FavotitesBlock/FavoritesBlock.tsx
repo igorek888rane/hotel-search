@@ -1,23 +1,28 @@
-import React, {FC, useMemo} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import styles from "./FavoritesBlock.module.scss";
 import s from '../HotelSearch.module.scss'
 import Sort from "./Sort";
 import HotelEl from "../HotelEl";
-import {useAppSelector} from "../../../hooks/useApp";
+import {useAppDispatch, useAppSelector} from "../../../hooks/useApp";
 import {quickSort} from "../../../utils/quickSort";
+import {sortByEnum} from "../../../redux/slices/sortSlice/sortTypes";
+import {IFavoriteHotel} from "../../../redux/slices/hotelsSlice/hotelsTypes";
+import {getFavoritesHotel} from "../../../redux/slices/hotelsSlice/ActionCreator";
 
 export type dateFormatProps = {
     dateFormat: string,
 }
 
 const FavoritesBlock: FC<dateFormatProps> = ({dateFormat}) => {
-
+        const dispatch = useAppDispatch()
+        useEffect(() => {
+            dispatch(getFavoritesHotel())
+        }, [])
         const {favoritesHotels} = useAppSelector(state => state?.hotels)
         const {sortName, sortBy} = useAppSelector(state => state?.sort)
 
-
-        const favoritesHotelsSort = useMemo(() => {
-            if (sortBy === 'ASC') {
+        const favoritesHotelsSort: IFavoriteHotel[] = useMemo(() => {
+            if (sortBy === sortByEnum.asc) {
                 return quickSort(favoritesHotels, sortName)
             } else {
                 return quickSort(favoritesHotels, sortName).reverse()

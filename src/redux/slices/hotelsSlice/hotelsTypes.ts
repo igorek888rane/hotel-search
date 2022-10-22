@@ -1,7 +1,8 @@
 export interface IHotelsState {
     hotels: IHotel[],
-    favoritesHotels: IHotel[],
+    favoritesHotels: IFavoriteHotel[],
     loading: boolean,
+    loadingFavorite: boolean,
     message: string,
 }
 
@@ -33,4 +34,9 @@ export interface HotelsParams {
     location: string,
     checkIn: string,
     checkOut: string,
+}
+
+export interface IFavoriteHotel extends IHotel {
+    userId: string,
+    _id:string,
 }

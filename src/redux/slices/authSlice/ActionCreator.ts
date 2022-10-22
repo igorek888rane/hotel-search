@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {IResponse, paramsType} from "./authTypes";
-import {auth, getMe} from "../../../api";
+import {auth, getMe} from "../../../api/userApi";
 import {setErrorMessage} from "./authSlice";
 
 

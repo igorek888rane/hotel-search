@@ -2,13 +2,13 @@ import React, {FC} from 'react';
 import styles from './HotelSearch.module.scss'
 import house from "../../assests/house.png";
 import Stars from "./Stars";
-import {addFavorites, removeFavorites} from "../../redux/slices/hotelsSlice/hotelsSlice";
-import {IHotel} from "../../redux/slices/hotelsSlice/hotelsTypes";
+import {IFavoriteHotel, IHotel} from "../../redux/slices/hotelsSlice/hotelsTypes";
 import {useAppDispatch, useAppSelector} from "../../hooks/useApp";
+import {addFavoritesHotel, deleteFavoritesHotel} from "../../redux/slices/hotelsSlice/ActionCreator";
 
 
 interface HotelElProps {
-    hotel: IHotel,
+    hotel: IHotel | IFavoriteHotel,
     allHotels: boolean,
     dateFormat: string
 }
@@ -18,9 +18,9 @@ const HotelEl: FC<HotelElProps> = ({hotel, allHotels, dateFormat}) => {
     const {info} = useAppSelector(state => state?.search)
     const dispatch = useAppDispatch()
     const favorite = favoritesHotels.find(f => f.hotelId === hotel.hotelId)
-    const addRemoveHandler = (hotel: IHotel) => {
-        if (favorite) dispatch(removeFavorites(hotel))
-        else dispatch(addFavorites(hotel))
+    const addRemoveHandler = (hotel: IHotel |IFavoriteHotel) => {
+        if (favorite) dispatch(deleteFavoritesHotel(hotel.hotelId))
+        else dispatch(addFavoritesHotel(hotel))
     }
     return (
         <div className={`${styles.hotel_block} ${allHotels ? styles.all_hotel : styles.favorite_hotel}`}>
